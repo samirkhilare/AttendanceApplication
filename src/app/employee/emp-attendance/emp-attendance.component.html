@@ -1,0 +1,28 @@
+<p-table [value]="dates" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Index</th>
+        <th>Date</th>
+        <th>Check In</th>
+        <th>Check Out</th>
+        <th>Total Hours</th>
+        <th>Check In/Check Out</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-date let-i="index">
+      <tr>
+        <td>{{ date.index }}</td>
+        <td>{{ date.date | date: "mediumDate" }}</td>
+        <td>{{ date.checkIn }}</td>
+        <td>{{ date.checkOut }}</td>
+        <td>{{ calculateDuration(date.checkIn, date.checkOut) }}</td>
+        
+        
+        
+        <td>
+          <button pButton pRipple type="button" label="Check In" class="p-button-outlined p-button-rounded" (click)="checkIn()"  [disabled]="!isCurrentDate(currentDate)" *ngIf="!checkedOut"></button>&nbsp;&nbsp;
+          <button pButton pRipple type="button" label="Check Out" class="p-button-outlined p-button-rounded" (click)="checkOut()" [disabled]="!isCurrentDate(currentDate)" *ngIf="!checkedIn"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
